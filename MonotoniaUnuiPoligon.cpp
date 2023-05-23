@@ -10,11 +10,15 @@ long long xMinInd, yMinInd;
 // Plecand de la punctul cu cel mai mic x, mergem de la stanga la dreapta. 
 // Cand ajungem la punctul cu cel mai mare x, schimbam directia si mergem de la dreapta la stanga
 
+bool compare(pair<long long, long long> p, pair<long long, long long> q){
+    return  p.second < q.second;
+}
+
 bool xMonotonie(){
     bool orientation = true;
     // Ne dorim sa pastram ordinea trigonometrica, dar vrem sa shiftam fiecare punct astfel incat sa le ordonam in functie de x
     rotate(points.begin(), points.begin() + xMinInd, points.end());
-    for(long long i = 0; i < n ; i++){
+    for(long long i = 0; i < n ; ++i){
         long long currentPct_x = points[(i+1) % n].first;
         long long anteriorPct_x = points[i].first;
 
@@ -35,15 +39,12 @@ bool xMonotonie(){
     }
     return true;
 }
-bool compare(pair<long long, long long> p, pair<long long, long long> q){
-    return  p.second < q.second;
-}
 
 bool yMonotonie(){
     bool orientation = true;
     yMinInd = min_element(points.begin(), points.end(), compare) - points.begin();
     rotate(points.begin(), points.begin() + yMinInd, points.end());
-    for(long long i = 0; i < n ; i++){
+    for(long long i = 0; i < n ; ++i){
         long long currentPct_y = points[(i + 1) % n].second;
         long long anteriorPct_y = points[i].second;
         if (currentPct_y > anteriorPct_y && !orientation){
@@ -62,9 +63,9 @@ bool yMonotonie(){
 int main() {
     cin >> n;
     long long x, y;
-    long long xMin = 100000000, yMin = 100000000;
+    long long xMin = 100000000;
     xMinInd = 0, yMinInd = 0;
-    for (long long i = 0; i < n; i++) {
+    for (long long i = 0; i < n; ++i) {
         cin >> x >> y;
         if(x < xMin)
         {

@@ -38,26 +38,24 @@ long long test(pair<long long, long long> pct) {
             left = mid;
     }
 
-    long long tt = orientare(poligon[left], poligon[(left + 1) % n], pct);
-    if (tt > 0)
+    long long oo = orientare(poligon[left], poligon[(left + 1) % n], pct);
+    if (oo > 0)
         return 1; // 1 este INSIDE
-    else if (tt == 0)
+    else if (oo == 0)
         return 2;
     return 0;
 }
-
-ifstream in("in");
 
 int main() {
     long long x, y;
     xMin = 100000000;
     yMin = 100000000;
-    yMax = -1000000;
-    xMax = -1000000;
-    yMax2 = -1000000;
+    yMax = -100000000;
+    xMax = -100000000;
+    yMax2 = -100000000;
     long long xMinInd = 0;
     cin >> n;
-    for (long long i = 0; i < n; i++) {
+    for (long long i = 0; i < n; ++i) {
         cin >> x >> y;
         if (x < xMin || (x == xMin && y > yMax2)) {
             xMin = x;
@@ -77,7 +75,7 @@ int main() {
 
     long long m;
     cin >> m;
-    for (long long i = 0; i < m; i++) {
+    for (long long i = 0; i < m; ++i) {
         cin >> x >> y;
         long long t = test(make_pair(x, y));
         if (t == 1)
