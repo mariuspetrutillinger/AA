@@ -191,6 +191,8 @@ for stage in range(1,nrstg):
 
     
     while len(Crossovers) > 1:
+
+        # Choose the last two chromosomes that will be crossed
         i = len(Crossovers) - 1
         j = i - 1
 
@@ -272,10 +274,13 @@ for stage in range(1,nrstg):
         MediumValSum += Fx # calculate the sum of the fitness functions
 
         if Fx < WorstValue:
+
+            # If the fitness function is smaller than the worst value then we save the index of the chromosome
+            # and the value of the fitness function
             WorstValue = Fx
             Worst = i
         
-
+    # Replace the worst chromosome with the fittest chromosome
     Chromosomes[Worst] = Fittest.copy()
     Max = max(Max, MaxFittest)
     MediumValSum = MediumValSum - WorstValue + MaxFittest
